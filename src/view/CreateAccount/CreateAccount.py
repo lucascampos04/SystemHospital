@@ -133,4 +133,3 @@ def WindowRegister():
 
     window.mainloop()
 
-WindowRegister()
