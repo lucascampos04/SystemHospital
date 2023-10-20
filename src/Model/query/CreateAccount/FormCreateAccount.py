@@ -1,15 +1,15 @@
 from src.Model.database.connect import connect_database, close_database
 
-def query_form_create_account(name, rg, cpf, email, telefone):
+def query_form_create_account(name, rg, cpf, email, telefone, password):
     connect = connect_database()
     if connect is not None:
         try:
             cursor = connect.cursor()
             query = """
-                INSERT INTO logs_users(nome, rg, cpf, email, telefone)
-                VALUES (%s, %s, %s, %s, %s)
+                INSERT INTO logs_users(nome, rg, cpf, email, telefone, password)
+                VALUES (%s, %s, %s, %s, %s, %s)
             """
-            cursor.execute(query, (name, rg, cpf, email, telefone))
+            cursor.execute(query, (name, rg, cpf, email, telefone, password))
             result = cursor.fetchone()
 
             if result:
