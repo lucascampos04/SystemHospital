@@ -2,6 +2,7 @@ from tkinter import Frame, Button, Label, Entry, Tk, Checkbutton, IntVar
 from tkinter import messagebox
 
 from src.Model.query.CreateAccount.FormCreateAccount import query_form_create_account
+from src.view.MarcaConsulta.MarcaConsulta import MarcaConsulta
 
 from src.view.Login.Login import WindowLogin
 
@@ -42,19 +43,21 @@ def register():
     # Insert banco de dados
     query_form_create_account(nome, rg, cpf, email, telefone, password)
 
+
     print("Usuário registrado com sucesso")
     print(f"Nome: {nome}, RG: {rg}, CPF: {cpf}, Telefone: {telefone}, Email: {email}, Senha: {password}")
 
-
+    # Feche a janela de registro e abra a janela de login
     window.destroy()
     WindowLogin()
+
+
 
 def toggle_password():
     if show_password_var.get() == 1:
         input_password.config(show="")
     else:
         input_password.config(show="*")
-
 
 def WindowRegister():
     global input_email, input_password, input_nome, input_rg, input_cpf, input_telefone, show_password_var, window
@@ -132,4 +135,3 @@ def WindowRegister():
     register_button.place(x=450, y=290)
 
     window.mainloop()
-

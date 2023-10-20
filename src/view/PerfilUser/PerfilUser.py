@@ -1,19 +1,7 @@
 from tkinter import Frame, Button, Label, Entry, Tk
-
-from src.view.Login.Login import WindowLogin
-from src.view.CreateAccount.CreateAccount import WindowRegister
-
-def router_login():
-    WindowLogin().destroy()
-    WindowLogin()
-
-def rouetr_CreateAccount():
-    WindowRegister().destroy()
-    WindowRegister()
-
 # colors
 blue = "#3b80d4"
-def WindowHome():
+def WindowPerfilUser():
     window = Tk()
     window.geometry("1200x600")
     window.resizable(False, False)
@@ -35,10 +23,7 @@ def WindowHome():
     title_header = Label(header, text="HOSPITAL.COM", font=("Arial 70 bold"), bg=blue, fg="white")
     title_header.place(x=30, y=20)
 
-    button_login = Button(header, text=("Login"), font=("Ivy 20 bold"), command=router_login)
-    button_login.place(x=1070, y=10)
-
-    button_CreateAccount = Button(header, text=("Criar conta"), font=("Ivy 20 bold"), command=rouetr_CreateAccount)
+    button_CreateAccount = Button(header, text=("PERFIL"), font=("Ivy 20 bold"), width=15)
     button_CreateAccount.place(x=880, y=10)
 
     # main
@@ -123,5 +108,5 @@ def WindowHome():
     # Footer content
     footer_label = Label(footer, text="© 2023 Hospital.com. Todos os direitos reservados.", font=("Arial 12"), bg="black", fg="white")
     footer_label.place(x=400, y=5)
+
     window.mainloop()
-WindowHome()

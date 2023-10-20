@@ -1,6 +1,7 @@
 from tkinter import Frame, Button, Label, Entry, Tk
 
 from src.Model.query.Login.LoginQuery import query_login
+from src.view.PerfilUser.PerfilUser import WindowPerfilUser
 
 global input_password, input_email
 def on_entry_click(event, entry, placeholder_text):
@@ -13,14 +14,25 @@ def on_focusout(event, entry, placeholder_text):
         entry.insert(0, placeholder_text)  # Coloca o texto de orientação
         entry.configure(fg="gray")  # Altera a cor do texto para cinza
 
-def login():
+def login(event=None):
+    global window
     email = input_email.get()
     password = input_password.get()
-    print(f"Email: {email}, Senha: {password}")
-    query_login(email, password)
+
+    authenticated_user = query_login(email, password)
+    if authenticated_user:
+        user_id = authenticated_user[0]
+        if user_id is not None:
+            print(f"Usuário autenticado. ID do usuário: {user_id}")
+        else:
+            print("ID do usuário não encontrado.")
+        window.destroy()
+        WindowPerfilUser()
+    else:
+        print("Falha na autenticação. Credenciais inválidas.")
 
 def WindowLogin():
-    global input_password, input_email
+    global input_password, input_email, window
     blue = "#3b80d4"
     groove = "#8a9099"
     blackLight = "#343638"
@@ -49,6 +61,7 @@ def WindowLogin():
     input_email.insert(0, "Digite seu email")
     input_email.bind("<FocusIn>", lambda event, entry=input_email: on_entry_click(event, entry, "Digite seu email"))
     input_email.bind("<FocusOut>", lambda event, entry=input_email: on_focusout(event, entry, "Digite seu email"))
+    input_email.bind("<Return>", login)
     input_email.place(x=50, y=120)
 
     # Campo de entrada de senha
@@ -56,6 +69,7 @@ def WindowLogin():
     input_password.insert(0, "Digite sua senha")
     input_password.bind("<FocusIn>", lambda event, entry=input_password: on_entry_click(event, entry, "Digite sua senha"))
     input_password.bind("<FocusOut>", lambda event, entry=input_password: on_focusout(event, entry, "Digite sua senha"))
+    input_password.bind("<Return>", login)
     input_password.place(x=50, y=180)
 
     # Botão de login
@@ -63,3 +77,4 @@ def WindowLogin():
     login_button.place(x=50, y=240)
 
     window.mainloop()
+
