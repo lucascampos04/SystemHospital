@@ -63,5 +63,3 @@ def WindowLogin():
     login_button.place(x=50, y=240)
 
     window.mainloop()
-
-WindowLogin()

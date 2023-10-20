@@ -1,10 +1,15 @@
 from tkinter import Frame, Button, Label, Entry, Tk
 
 from src.view.Login.Login import WindowLogin
+from src.view.CreateAccount.CreateAccount import WindowRegister
 
 def router_login():
     window.destroy()
     WindowLogin()
+
+def rouetr_CreateAccount():
+    window.destroy()
+    WindowRegister()
 
 # colors
 blue = "#3b80d4"
@@ -33,7 +38,7 @@ title_header.place(x=30, y=20)
 button_login = Button(header, text=("Login"), font=("Ivy 20 bold"), command=router_login)
 button_login.place(x=1070, y=10)
 
-button_CreateAccount = Button(header, text=("Criar conta"), font=("Ivy 20 bold"))
+button_CreateAccount = Button(header, text=("Criar conta"), font=("Ivy 20 bold"), command=rouetr_CreateAccount)
 button_CreateAccount.place(x=880, y=10)
 
 # main
