@@ -3,8 +3,9 @@ from tkinter import Frame, Button, Label, Entry, Tk
 from src.view.Login.Login import WindowLogin
 from src.view.CreateAccount.CreateAccount import WindowRegister
 
+global window
 def router_login():
-    WindowLogin().destroy()
+    window.destroy()
     WindowLogin()
 
 def rouetr_CreateAccount():
@@ -14,6 +15,7 @@ def rouetr_CreateAccount():
 # colors
 blue = "#3b80d4"
 def WindowHome():
+    global window
     window = Tk()
     window.geometry("1200x600")
     window.resizable(False, False)

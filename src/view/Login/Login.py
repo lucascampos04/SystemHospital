@@ -1,4 +1,4 @@
-from tkinter import Frame, Button, Label, Entry, Tk
+from tkinter import Frame, Button, Label, Entry, Tk, messagebox
 
 from src.Model.query.Login.LoginQuery import query_login
 from src.view.PerfilUser.PerfilUser import WindowPerfilUser
@@ -29,6 +29,7 @@ def login(event=None):
         window.destroy()
         WindowPerfilUser()
     else:
+        messagebox.showerror("Falha", "Falha na autenticação. Credenciais inválidas.")
         print("Falha na autenticação. Credenciais inválidas.")
 
 def WindowLogin():

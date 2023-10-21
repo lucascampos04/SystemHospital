@@ -41,15 +41,24 @@ def register():
         return
 
     # Insert banco de dados
-    query_form_create_account(nome, rg, cpf, email, telefone, password)
+    authenticated_user = query_form_create_account(nome, rg, cpf, email, telefone, password)
 
+    if authenticated_user:
+        user_id = authenticated_user
+        if user_id is not None:
+            print(f"Usuário criado.ID do usuário: {user_id}")
+            window.destroy()
+            WindowLogin()
+        else:
+            print("ID do usuário não encontrado.")
 
-    print("Usuário registrado com sucesso")
-    print(f"Nome: {nome}, RG: {rg}, CPF: {cpf}, Telefone: {telefone}, Email: {email}, Senha: {password}")
+    else:
+        messagebox.showerror("Falha", "Falha na autenticação. Credenciais inválidas.")
+        print("Falha na autenticação. Credenciais inválidas.")
+
 
     # Feche a janela de registro e abra a janela de login
-    window.destroy()
-    WindowLogin()
+
 
 
 
@@ -135,3 +144,4 @@ def WindowRegister():
     register_button.place(x=450, y=290)
 
     window.mainloop()
+WindowRegister()
