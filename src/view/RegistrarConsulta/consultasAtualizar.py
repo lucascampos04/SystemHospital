@@ -1,12 +1,47 @@
-from tkinter import Label, Entry, Button, Frame, ttk, Tk
+from tkinter import Label, Entry, Button, Frame, ttk, Tk, messagebox
+from tkinter.simpledialog import askstring
 
-def atualizar_consulta():
-    coluna_selecionada = coluna_combobox.get()
-    novo_valor = novo_valor_entry.get()
-    print(f"Atualizando consulta na coluna {coluna_selecionada} com o novo valor {novo_valor}")
+from src.Model.query.consultasQuery import atualizar_tabelaID
+from src.Model.query.consultasQuery import atualizar_coluna_consulta
+
+global consultas, tabela_consultas, id_valor_entry, idV, coluna_combobox, atualizar_button, colunas
+
+colunas = ["tipo_consulta", "dataConsulta", "horario", "endereco", "id_medico", "id_paciente"]
+
+def listar_tabela():
+    id = id_valor_entry.get()
+    colunavalue = coluna_combobox.get()
+
+    if not id or not colunavalue:
+        messagebox.showerror("Erro", "Por favor, preencha os campos ID e Coluna.")
+        return
+
+    consulta = atualizar_tabelaID(id)
+
+    for row in tabela_consultas.get_children():
+        tabela_consultas.delete(row)
+
+    if consulta:
+        for row in consulta:
+            tabela_consultas.insert("", "end", values=row)
+
+        if colunavalue in colunas:
+            while True:
+                newValueColumn = askstring("Novo valor", f"Altere o valor da coluna '{colunavalue}':")
+                if newValueColumn is None:
+                    break
+                elif newValueColumn.strip():
+                    atualizar_coluna_consulta(id, colunavalue, newValueColumn)
+                    listar_tabela()
+                    break
+    else:
+        messagebox.showerror("Erro", "Nenhuma consulta encontrada com o ID fornecido")
+
+def atualizar_tabela():
+    listar_tabela()
 
 def WindowUpdateConsulta():
-    global coluna_combobox, novo_valor_entry, window
+    global coluna_combobox, id_valor_entry, window, consultas, tabela_consultas, idV, atualizar_button
 
     window = Tk()
     window.title("Atualizar Consulta")
@@ -23,14 +58,14 @@ def WindowUpdateConsulta():
     coluna_combobox = ttk.Combobox(window, values=colunas)
     coluna_combobox.place(x=190, y=90)
 
-    novo_valor_label = Label(window, text="ID da consulta:", font=("Arial 12"))
-    novo_valor_label.place(x=30, y=60)
+    id_valor_label = Label(window, text="ID da consulta:", font=("Arial 12"))
+    id_valor_label.place(x=30, y=60)
 
-    novo_valor_entry = Entry(window, font=("Arial 12"))
-    novo_valor_entry.place(x=190, y=60)
+    id_valor_entry = Entry(window, font=("Arial 12"))
+    id_valor_entry.place(x=190, y=60)
 
-    atualizar_button = Button(window, text="Atualizar", font=("Arial 14 bold"), bg="green", fg="white", command=atualizar_consulta)
-    atualizar_button.place(x=350, y=300)
+    atualizar_button = Button(window, text="Atualizar", font=("Arial 14 bold"), bg="green", fg="white", command=atualizar_tabela)
+    atualizar_button.place(x=350, y=60)
 
     # Tabela
     tabela_consultas = ttk.Treeview(window, columns=("ID", "TIPO", "DATA", "HORÁRIO", "ENDEREÇO", "MÉDICO", "PACIENTE"),
@@ -43,7 +78,6 @@ def WindowUpdateConsulta():
     tabela_consultas.heading('#6', text="ID MÉDICO", anchor='center')
     tabela_consultas.heading('#7', text="ID PACIENTE", anchor='center')
 
-    # Ajustar a largura das colunas
     tabela_consultas.column('#1', width=50, anchor='center')
     tabela_consultas.column('#2', width=150, anchor='center')
     tabela_consultas.column('#3', width=80, anchor='center')
@@ -55,8 +89,6 @@ def WindowUpdateConsulta():
     style = ttk.Style()
     style.configure("Treeview", rowheight=30, borderwidth=1)
 
-    # Posição da tabela
     tabela_consultas.place(x=30, y=150, width=740, height=200)
     window.mainloop()
 
-WindowUpdateConsulta()

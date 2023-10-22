@@ -3,18 +3,24 @@ from tkinter import Tk, Label, Button, Frame, ttk, messagebox
 from src.Model.query.consultasQuery import listar_consultas
 
 from src.view.RegistrarConsulta.removeConsulta import WindowConsultaRemove
+from src.view.RegistrarConsulta.addConsulta import WindowAddConsulta
+from src.view.RegistrarConsulta.consultasAtualizar import WindowUpdateConsulta
 
 global tabela_consultas, consultas
 
 def router_remover():
     WindowConsultaRemove()
 
+def router_adicionar():
+    WindowAddConsulta()
+def router_editar():
+    WindowUpdateConsulta()
 def atualizar_tabela_consultas():
     global consultas
     consultas = listar_consultas()
     tabela_consultas.delete(*tabela_consultas.get_children())
     for consulta in consultas:
-        tabela_consultas.insert("", "end", values=(consulta[0], consulta[1], consulta[2], consulta[3], consulta[4], consulta[5]))
+        tabela_consultas.insert("", "end", values=(consulta[0], consulta[1], consulta[2], consulta[3], consulta[4], consulta[5], consulta[6]))
 
 def preencher_tabela_consultas():
     global consultas
@@ -66,13 +72,13 @@ def WindowTableConsultas():
 
     tabela_consultas.place(x=100, y=50)
 
-    btnAdd = Button(frameM, text="Adicionar", font=("Arial 15 bold"), bg="green", fg="white")
+    btnAdd = Button(frameM, text="Adicionar", font=("Arial 15 bold"), bg="green", fg="white", command=router_adicionar)
     btnAdd.place(x=100, y=400)
 
     btnRemove = Button(frameM, text="Remover", font=("Arial 15 bold"), bg="red", fg="white", command=router_remover)
     btnRemove.place(x=230, y=400)
 
-    btnEditar = Button(frameM, text="Editar", font=("Arial 15 bold"), bg="blue", fg="white", command=router_remover)
+    btnEditar = Button(frameM, text="Editar", font=("Arial 15 bold"), bg="blue", fg="white", command=router_editar)
     btnEditar.place(x=350, y=400)
 
 
@@ -82,6 +88,3 @@ def WindowTableConsultas():
 
     preencher_tabela_consultas()
     window.mainloop()
-
-
-WindowTableConsultas()
