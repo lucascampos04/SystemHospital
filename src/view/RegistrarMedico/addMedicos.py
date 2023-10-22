@@ -95,5 +95,3 @@ def WindowAddMedico():
 
     window.bind('<Return>', lambda event=None: btn_add.invoke())
     window.mainloop()
-
-WindowAddMedico()

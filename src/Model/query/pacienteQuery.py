@@ -115,3 +115,40 @@ def query_remove_paciente(cpf):
     return False
 
 
+def atualizar_tabelaID(id):
+    conn = connect_database()
+    if conn is not None:
+        try:
+            cursor = conn.cursor()
+            query = "SELECT id, nome, cpf, rg, email, telefone FROM pacientes WHERE id = %s"
+            cursor.execute(query, (id,))
+            consulta = cursor.fetchall()
+            cursor.close()
+            conn.close()
+            print("Consulta de consulta com sucesso")
+            return consulta
+        except Exception as err:
+            print(f"Erro ao consultar o banco de dados de consultas: {str(err)}")
+
+
+def atualizar_coluna_consulta(id, coluna, novo_valor):
+    conn = connect_database()
+    if conn is not None:
+        try:
+            cursor = conn.cursor()
+            colunas_seguras = ["nome", "cpf", "rg", "email", "telefone"]
+            if coluna not in colunas_seguras:
+                raise ValueError("Coluna inválida")
+
+            query = f"UPDATE pacientes SET {coluna} = %s WHERE id = %s"
+            values = (novo_valor, id)
+
+            cursor.execute(query, values)
+            conn.commit()
+            cursor.close()
+            conn.close()
+            return True
+        except Exception as err:
+            print(f"Erro ao atualizar coluna de consulta: {str(err)}")
+    return False
+

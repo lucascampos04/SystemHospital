@@ -5,12 +5,17 @@ from src.Model.query.medicosQuery import listar_medicos, query_remove_medico
 from src.view.RegistrarMedico.addMedicos import WindowAddMedico
 from src.view.RegistrarMedico.medicosRemover import WindowMedicosRemove
 
+from src.view.RegistrarMedico.medicoAtualizar import WindowUpdateMedico
+
 global tabela_medicos, medicos
 
 def router_addMedico():
     WindowAddMedico()
 def router_RemoveMedico():
     WindowMedicosRemove()
+
+def router_AttMedico():
+    WindowUpdateMedico()
 
 cinza = "#5e4f4c"
 
@@ -96,6 +101,8 @@ def WindowTableMedicos():
     btnAtualizar = Button(frameM, text="Atualizar Tabela", font=("Arial 15 bold"), command=atualizar_tabela, bg=cinza, fg="white")
     btnAtualizar.place(x=765, y=400)
 
+    btnEditar = Button(frameM, text="Editar", font=("Arial 15 bold"), bg="blue", fg="white", command=router_AttMedico)
+    btnEditar.place(x=350, y=400)
+
     window.mainloop()
 
-WindowTableMedicos()

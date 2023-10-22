@@ -81,8 +81,6 @@ def WindowTableConsultas():
     btnEditar = Button(frameM, text="Editar", font=("Arial 15 bold"), bg="blue", fg="white", command=router_editar)
     btnEditar.place(x=350, y=400)
 
-
-
     btnAtualizar = Button(frameM, text="Atualizar Tabela", font=("Arial 15 bold"),fg="black", command=atualizar_tabela_consultas)
     btnAtualizar.place(x=650, y=400)
 

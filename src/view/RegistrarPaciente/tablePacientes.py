@@ -2,7 +2,7 @@ from tkinter import Tk, Label, Entry, Button, Frame, ttk, messagebox
 
 from src.Model.query.pacienteQuery import listar_pacientes
 from src.view.RegistrarPaciente.RemoverPaciente import WindowPacienteRemove
-
+from src.view.RegistrarPaciente.pacienteAtualizar import WindowUpdatePacientes
 from src.view.RegistrarPaciente.PacienteAdd import WindowAddPaciente
 
 global tabela_pacientes, pacientes
@@ -14,6 +14,9 @@ def router_addPaciente():
 
 def router_RemovePaciente():
     WindowPacienteRemove()
+
+def router_attPaciente():
+    WindowUpdatePacientes()
 def atualizar_tabela():
     pacientes = listar_pacientes()
     tabela_pacientes.delete(*tabela_pacientes.get_children())
@@ -77,6 +80,10 @@ def WindowTablePaciente():
     btnAtualizar = Button(frameM, text="Atualizar Tabela", font=("Arial 15 bold"), command=atualizar_tabela, bg=cinxa, fg="white")
     btnAtualizar.place(x=575, y=400)
 
+    btnEditar = Button(frameM, text="Editar", font=("Arial 15 bold"), bg="blue", fg="white", command=router_attPaciente)
+    btnEditar.place(x=350, y=400)
+
     window.mainloop()
 
 WindowTablePaciente()
+
