@@ -9,7 +9,6 @@ global tabela_medicos, medicos
 
 def router_addMedico():
     WindowAddMedico()
-
 def router_RemoveMedico():
     WindowMedicosRemove()
 

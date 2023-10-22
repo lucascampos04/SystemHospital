@@ -1,8 +1,13 @@
 from tkinter import Tk, Label, Button, Frame, ttk, messagebox
+
 from src.Model.query.consultasQuery import listar_consultas
+
+from src.view.RegistrarConsulta.removeConculta import WindowConsultaRemove
 
 global tabela_consultas, consultas
 
+def router_remover():
+    WindowConsultaRemove()
 
 def atualizar_tabela_consultas():
     global consultas
@@ -64,10 +69,10 @@ def WindowTableConsultas():
     btnAdd = Button(frameM, text="Adicionar", font=("Arial 15 bold"), bg="green", fg="white")
     btnAdd.place(x=100, y=400)
 
-    btnRemove = Button(frameM, text="Remover", font=("Arial 15 bold"), bg="red", fg="white")
+    btnRemove = Button(frameM, text="Remover", font=("Arial 15 bold"), bg="red", fg="white", command=router_remover)
     btnRemove.place(x=250, y=400)
 
-    btnAtualizar = Button(frameM, text="Atualizar Tabela", font=("Arial 15 bold"),fg="black")
+    btnAtualizar = Button(frameM, text="Atualizar Tabela", font=("Arial 15 bold"),fg="black", command=atualizar_tabela_consultas)
     btnAtualizar.place(x=650, y=400)
 
     preencher_tabela_consultas()
