@@ -6,7 +6,7 @@ def connect_database():
             host="localhost",
             user="root",
             password="senha123456",
-            database="hospital"
+            database="hospitaldb"
         )
         print("Conexão realizada com sucesso")
         return connection
