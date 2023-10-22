@@ -1,8 +1,6 @@
 from tkinter import Tk, Label, Entry, Button, Frame
-
 from src.Model.query.pacienteQuery import add_paciente
 
-from src.view.RegistrarPaciente.TablePacientes import WindowTablePaciente
 
 global nome_entry, cpf_entry, email_entry, rg_entry, telefone_entry, window
 
@@ -13,9 +11,14 @@ def adicionar_paciente():
     rg = rg_entry.get()
     telefone = telefone_entry.get()
 
-    add_paciente(nome, cpf, email, rg, telefone)
-    window.destroy()
-    WindowTablePaciente()
+    verificacao = add_paciente(nome, cpf, email, rg, telefone)
+
+    if verificacao:
+        window.destroy()
+        return True;
+
+
+
 def WindowAddPaciente():
     global nome_entry, cpf_entry, email_entry, rg_entry, telefone_entry, window
 
@@ -53,9 +56,7 @@ def WindowAddPaciente():
     telefone_entry.place(x=150, y=200)
 
     btn_add = Button(window, text="Adicionar", font=("Ivy 20 bold"), command=adicionar_paciente)
-    btn_add.place(x=120, y=240)  # Atualize a posição do botão
+    btn_add.place(x=120, y=240)
 
     window.bind('<Return>', lambda event=None: btn_add.invoke())
     window.mainloop()
-
-WindowAddPaciente()

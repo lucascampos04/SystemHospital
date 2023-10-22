@@ -1,6 +1,7 @@
 from src.Model.database.connect import connect_database, close_database
 from tkinter import messagebox
 
+
 def add_paciente(nome, cpf, email, telefone, rg):
     if nome and cpf and email and rg:
         conn = connect_database()
@@ -69,7 +70,7 @@ def listar_pacientes():
     if conn is not None:
         try:
             cursor = conn.cursor()
-            query = "SELECT id, nome, cpf, email, telefone FROM pacientes"
+            query = "SELECT id, nome, cpf, rg, email, telefone FROM pacientes"
             cursor.execute(query)
             pacientes = cursor.fetchall()
             cursor.close()
@@ -78,4 +79,39 @@ def listar_pacientes():
             return pacientes
         except Exception as err:
             print(f"Erro ao consultar o banco de dados: {str(err)}")
+
+
+from tkinter import messagebox
+
+def query_remove_paciente(cpf):
+    conn = connect_database()
+    if conn is not None:
+        try:
+            cursor = conn.cursor()
+            if not cpf:
+                # Verifique se o campo de CPF está vazio
+                messagebox.showerror("Erro", "Campo CPF está vazio.")
+                return False
+
+            # Consulte o paciente com o CPF fornecido
+            cursor.execute("SELECT id FROM pacientes WHERE cpf = %s", (cpf,))
+            paciente = cursor.fetchone()
+
+            if paciente:
+                # Exclua o paciente com o ID especificado
+                cursor.execute("DELETE FROM pacientes WHERE cpf = %s", (cpf,))
+                conn.commit()
+                cursor.close()
+                conn.close()
+                messagebox.showinfo("Sucesso", "Paciente Deletado com sucesso")
+                return True
+            else:
+                cursor.close()
+                conn.close()
+                messagebox.showerror("Erro", "Paciente não encontrado.")
+                return False
+        except Exception as err:
+            messagebox.showerror("Erro", f"Erro ao excluir paciente: {str(err)}")
+    return False
+
 
