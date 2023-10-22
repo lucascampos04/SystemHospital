@@ -68,6 +68,23 @@ def listar_consultas():
         except Exception as err:
             print(f"Erro ao consultar o banco de dados de consultas: {str(err)}")
 
+def atualizar_tabelaID(id):
+    conn = connect_database()
+    if conn is not None:
+        try:
+            cursor = conn.cursor()
+            query = "SELECT id, tipo_consulta, dataConsulta, horario, endereco, id_medico, id_paciente FROM consultas WHERE id = %s"
+            cursor.execute(query, (id,))
+            consulta = cursor.fetchall()
+            cursor.close()
+            conn.close()
+            print("Consulta de consulta com sucesso")
+            return consulta
+        except Exception as err:
+            print(f"Erro ao consultar o banco de dados de consultas: {str(err)}")
+
+
+
 def query_remove_consulta(consulta_id):
     conn = connect_database()
     if conn is not None:
@@ -98,6 +115,9 @@ def query_remove_consulta(consulta_id):
         except Exception as err:
             messagebox.showerror("Erro", f"Erro ao excluir consulta: {str(err)}")
     return False
+
+
+
 
 
 
