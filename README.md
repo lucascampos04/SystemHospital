@@ -5,6 +5,6 @@ Este projeto tem como objetivo aplicar conhecimentos sólidos em desenvolvimento
 ## 📋 Pré-requisitos
 De que coisas você precisa para instalar o software e como instalá-lo?
 
-1 - instalar o Python em sua maquina. <a href="" download>Download</a>
+1 - instalar o Python em sua maquina. <a href="https://www.python.org/downloads/" download>Download</a>
 
 
