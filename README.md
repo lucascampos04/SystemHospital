@@ -92,6 +92,18 @@ Tabela de Consultas
 );
 ```
 
+# Com o ambiente configurado, você está pronto para executar o software! 😁
+
+Agora que você concluiu as etapas de criação do banco de dados e das tabelas, é hora de dar vida ao seu Sistema de Gestão Hospitalar. Siga as etapas abaixo para rodar o software:
+
+1. Abra o script 'home'.
+
+2. Execute o software pressionando 'Run'.
+
+Aproveite a utilização do seu novo sistema e leve a gestão hospitalar a um novo patamar. Em caso de dúvidas ou problemas, não hesite em entrar em contato conosco.
+
+Boa sorte e obrigado por escolher o Sistema de Hospital! 🏥🩺
+
 
 
 
