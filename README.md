@@ -20,6 +20,12 @@ Windows:
 
 ```plaintext
 pip install tkinter
+```
+Com o cmd (Terminal) aberto execute outro comando : 
+
+```plaintext
+pip install mysql-connector-python
+```
 
 
 
