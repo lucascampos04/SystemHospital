@@ -26,6 +26,75 @@ Com o cmd (Terminal) aberto execute outro comando :
 ```plaintext
 pip install mysql-connector-python
 ```
+## Configurando Banco de Dados
+
+Antes de usar o sistema, é necessário configurar o banco de dados. Siga as etapas abaixo:
+
+### Passo 1: Crie o Banco de Dados
+Abra o MySQL e execute o seguinte comando para criar o banco de dados HospitalDB:
+
+```plaintext
+create database HospitalDB;
+```
+
+### Passo 2: Selecione o Banco de Dados
+Depois de criar o banco de dados, selecione-o usando o comando USE:
+
+```plaintext
+use HospitalDB;
+```
+
+### Passo 3: Criar Tabelas
+Depois de selecionar o banco de dados, crie as tabelas:
+
+Tabela de Pacientes
+```plaintext
+    create table pacientes(
+	  id int primary key auto_increment,
+    nome varchar(100) not null,
+    email varchar(100) not null,
+    telefone char(19) not null,
+    cpf char(20) not null,
+    rg char(20) not null
+);
+```
+
+<hr/>
+
+Tabela de Medicos
+```plaintext
+    create table medicos(
+  	id int primary key auto_increment,
+    nome varchar(80) not null,
+    email varchar(100) not null,
+    telefone char(19) not null,
+    cpf char(20) not null,
+    rg char(20) not null,
+    formacao varchar(90) not null,
+    setor varchar(80) not null
+);
+```
+
+<hr/>
+
+Tabela de Consultas
+```plaintext
+    create table consultas(
+	  id int primary key auto_increment,
+    tipo_consulta varchar(80) not null, 
+    dataConsulta char(10) not null,
+    horario char(5) not null, 
+    endereco varchar(50) not null,
+    id_medico int not null,
+    id_paciente int not null,
+    foreign key(id_medico) references medicos(id),
+    foreign key(id_paciente) references pacientes(id)
+);
+```
+
+
+
+
 
 
 
