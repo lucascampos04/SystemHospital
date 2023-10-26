@@ -89,4 +89,3 @@ def WindowUpdatePacientes():
 
     tabela_pacientes.place(x=30, y=150, width=740, height=200)
     window.mainloop()
-WindowUpdatePacientes()

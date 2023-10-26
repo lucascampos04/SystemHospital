@@ -85,5 +85,5 @@ def WindowTablePaciente():
 
     window.mainloop()
 
-WindowTablePaciente()
+
 

@@ -1,23 +1,13 @@
-from tkinter import Tk, Label, Entry, Button
-from PIL import Image, ImageTk
+from tkinter import Tk, Label, Frame, Button, Entry
 
 from src.view.RegistrarPaciente.tablePacientes import WindowTablePaciente
 from src.view.RegistrarConsulta.tableConsultas import WindowTableConsultas
 from src.view.RegistrarMedico.tableMedicos import WindowTableMedicos
 
-def set_window_background(window, gradient_color1, gradient_color2):
-    width, height = window.winfo_width(), window.winfo_height()
-    image = Image.new("RGB", (width, height))
-    for y in range(height):
-        r = int(gradient_color1[0] + (y / height) * (gradient_color2[0] - gradient_color1[0]))
-        g = int(gradient_color1[1] + (y / height) * (gradient_color2[1] - gradient_color1[1]))
-        b = int(gradient_color1[2] + (y / height) * (gradient_color2[2] - gradient_color1[2]))
-        for x in range(width):
-            image.putpixel((x, y), (r, g, b))
-    photo = ImageTk.PhotoImage(image)
-    label = Label(window, image=photo)
-    label.image = photo
-    label.place(x=0, y=0, relwidth=1, relheight=1)
+azul = "#2f5694"
+azul_poggers = "#080d8a"
+verde = "#15800f"
+vermelho = "#ff0000"
 
 def router_paciente():
     WindowTablePaciente()
@@ -26,24 +16,63 @@ def router_medicos():
 def router_consultas():
     WindowTableConsultas()
 
-azul = "#66adbd"
-verde = "#32a852"
-roxo =  "#5c5685"
-def WindowMain():
+
+def center_window(window, width, height):
+    screen_width = window.winfo_screenwidth()
+    screen_height = window.winfo_screenheight()
+    x = (screen_width - width) // 2
+    y = (screen_height - height) // 2
+    window.geometry(f"{width}x{height}+{x}+{y}")
+
+def main():
     window = Tk()
-    window.geometry("500x500")
-    window.title("Pagina Inicial")
-    window.resizable(False, False)
+    window.title("Janela Centralizada")
+    center_window(window, 800, 400)
 
-    btnPaciente = Button(window, text="PACIENTES", font=("Arial 20 bold"), command=router_paciente, bg=verde, fg="white")
-    btnPaciente.place(x=40, y=180)
+    # Frames
+    frame_top = Frame(window, width=800, height=120, bg=azul)
+    frame_top.grid(row=0, column=0)
 
-    btnMedico = Button(window, text="MEDICOS", font=("Arial 20 bold"), command=router_medicos, bg=azul, fg="white")
-    btnMedico.place(x=270, y=180)
+    frame_main = Frame(window, width=800, height=380)
+    frame_main.grid(row=1, column=0)
 
-    btnConsultas = Button(window, text="CONSULTAS", font=("Arial 20 bold"), command=router_consultas, bg=roxo, fg="white")
-    btnConsultas.place(x=150, y=250)
+    # titule
+    title = Label(frame_top, text="Hospital.com", bg=azul, fg="white", font=("Ivy 60 bold"))
+    title.place(x=200, y=10)
+
+    # Botões e Labels
+    btn_add_paciente = Button(frame_main,
+                              text="PACIENTES",
+                              font=("Arial 25 bold"),
+                              relief='ridge',
+                              bg=verde,
+                              fg="white",
+                              activebackground=verde,
+                              activeforeground="white",
+                              command=router_paciente)  # Usando 'command' para definir a função a ser chamada
+    btn_add_paciente.place(x=40, y=70)
+
+    btn_add_consultas = Button(frame_main,
+                              text="CONSULTAS",
+                              font=("Arial 25 bold"),
+                              relief='ridge',
+                              bg="white",
+                              fg=azul_poggers,
+                              activeforeground=azul_poggers,
+                              command=router_consultas)  # Usando 'command' para definir a função a ser chamada
+    btn_add_consultas.place(x=300, y=70)
+
+    btn_add_medicos = Button(frame_main,
+                               text="MÉDICOS",
+                               font=("Arial 25 bold"),
+                               relief='ridge',
+                               bg=azul_poggers,
+                               fg='white',
+                               activeforeground="white",
+                               activebackground=azul_poggers,
+                               command=router_medicos)  # Usando 'command' para definir a função a ser chamada
+    btn_add_medicos.place(x=570, y=70)
 
     window.mainloop()
 
-WindowMain()
+main()
