@@ -6,12 +6,18 @@ global cpf_entry
 def confirm_remove():
     cpf_paciente = cpf_entry.get()
     query_remove_paciente(cpf_paciente)
+def center_window(window, width, height):
+    screen_width = window.winfo_screenwidth()
+    screen_height = window.winfo_screenheight()
+    x = (screen_width - width) // 2
+    y = (screen_height - height) // 2
+    window.geometry(f"{width}x{height}+{x}+{y}")
 def WindowPacienteRemove():
     global cpf_entry
 
     window = Tk()
     window.title("Adicionar Paciente")
-    window.geometry("400x300")
+    center_window(window, 400, 300)
     window.resizable(False, False)
 
     title = Label(window, text="Remover", font=("Arial 25 bold"))

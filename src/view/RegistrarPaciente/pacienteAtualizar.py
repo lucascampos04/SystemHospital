@@ -40,12 +40,19 @@ def listar_tabela():
 def atualizar_tabela():
     listar_tabela()
 
+def center_window(window, width, height):
+    screen_width = window.winfo_screenwidth()
+    screen_height = window.winfo_screenheight()
+    x = (screen_width - width) // 2
+    y = (screen_height - height) // 2
+    window.geometry(f"{width}x{height}+{x}+{y}")
+
 def WindowUpdatePacientes():
     global coluna_combobox, id_valor_entry, window, consultas, tabela_pacientes, idV, atualizar_button
 
     window = Tk()
     window.title("Atualizar Consulta")
-    window.geometry("800x400")
+    center_window(window, 800, 400)
     window.resizable(False, False)
 
     title = Label(window, text="Atualizar Consulta", font=("Arial 20 bold"))

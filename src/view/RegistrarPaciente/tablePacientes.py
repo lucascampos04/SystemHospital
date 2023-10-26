@@ -30,13 +30,19 @@ def preencher_tabela():
     for paciente in pacientes:
         tabela_pacientes.insert("", "end", values=(paciente[0], paciente[1], paciente[2], paciente[5], paciente[4], paciente[3]))
 
+def center_window(window, width, height):
+    screen_width = window.winfo_screenwidth()
+    screen_height = window.winfo_screenheight()
+    x = (screen_width - width) // 2
+    y = (screen_height - height) // 2
+    window.geometry(f"{width}x{height}+{x}+{y}")
 
 def WindowTablePaciente():
     global tabela_pacientes, pacientes
 
     window = Tk()
     window.title("Pacientes")
-    window.geometry("800x600")
+    center_window(window, 800, 580)
     window.resizable(False, False)
 
     frameT = Frame(window, width=1080, height=100, bg="blue")
